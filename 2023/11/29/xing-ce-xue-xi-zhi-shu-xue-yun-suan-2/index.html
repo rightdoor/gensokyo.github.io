@@ -135,6 +135,41 @@
 </div>
 
   
+    
+    <div class="widget-wrap">
+      <div class="widget">
+        <h3 class="widget-title">运行时间</h3>
+        
+        <span id="days"></span> 天
+        <span id="hours"></span> 小时
+        <span id="minutes"></span> 分钟
+        <span id="seconds"></span> 秒
+
+      </div>
+    </div>
+  
+
+  <script>
+    function updateElapsedTime() {
+      var now = new Date();
+      var targetDate = new Date("2023-11-25 21:31:16"); // 设置目标时间
+
+      var timeDiff = now.getTime() - targetDate.getTime(); // 计算时间差（毫秒）
+      var seconds = Math.floor(timeDiff / 1000) % 60;
+      var minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
+      var hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
+      var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+      // 更新时间差显示
+      document.getElementById("days").innerHTML = days;
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("minutes").innerHTML = minutes;
+      document.getElementById("seconds").innerHTML = seconds;
+    }
+
+    setInterval(updateElapsedTime, 1000); // 每秒更新一次时间差
+  </script>
+  
   <div class="sticky">
     
       
@@ -144,14 +179,14 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">
-                实用笔记
-                <div class="category-count">2</div>
-            </a>
-        
             <a class="category-link" href="/categories/hexo/">
                 hexo
                 <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">
+                实用笔记
+                <div class="category-count">2</div>
             </a>
         
             <a class="category-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
@@ -399,6 +434,9 @@
 <script>
   function updateTime() {
     var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var day = now.getDay();
     var hours = now.getHours();
     var minutes = now.getMinutes();
     var seconds = now.getSeconds();
@@ -415,7 +453,7 @@
     }
 
     // 更新时间显示
-    document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+    document.getElementById("time").innerHTML = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
   }
 
   setInterval(updateTime, 1000); // 每秒更新一次时间
