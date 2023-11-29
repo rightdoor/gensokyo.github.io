@@ -140,14 +140,14 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/hexo/">
-                hexo
-                <div class="category-count">1</div>
-            </a>
-        
             <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">
                 实用笔记
                 <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/hexo/">
+                hexo
+                <div class="category-count">1</div>
             </a>
         
             <a class="category-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
@@ -356,8 +356,36 @@
     &copy; 2023 rightdoor<br>
     Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
   </div>
+
+  <div class="xyz">
+    <h1>当前时间为：<span id="time"></span></h1>
+  </div>
 </footer>
 
+<script>
+  function updateTime() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    // 将小时、分钟和秒数转换为两位数
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    // 更新时间显示
+    document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+  }
+
+  setInterval(updateTime, 1000); // 每秒更新一次时间
+</script>
     </div>
     <div class="back-to-top-wrapper">
     <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
