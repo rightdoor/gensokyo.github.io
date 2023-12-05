@@ -132,39 +132,128 @@
 
   
     
-    <div class="widget-wrap">
-      <div class="widget">
-        <h3 class="widget-title">运行时间</h3>
-        
-        <span id="days"></span> 天
-        <span id="hours"></span> 小时
-        <span id="minutes"></span> 分钟
-        <span id="seconds"></span> 秒
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">统计信息</h3>
 
-      </div>
+      
+        总文章数：<a>11</a> 篇<br>
+        总字数：<a>12109</a> 字<br>
+        最近更新时间：<br><a>2023-12-06 00:43:40</a><br>
+        <a id="lastupdatedate" style="display: none;">1701794620000</a>
+
+        距离上次更新：<br>
+        <a>
+          <span id="lastdays"></span> 天
+          <span id="lasthours"></span> 小时
+          <span id="lastminutes"></span> 分钟
+          <span id="lastseconds"></span> 秒
+        </a>
+        <br>
+
+        已运行：<br>
+        <a>
+          <span id="days"></span> 天
+          <span id="hours"></span> 小时
+          <span id="minutes"></span> 分钟
+          <span id="seconds"></span> 秒
+        </a>
+
     </div>
+  </div>
   
 
-  <script>
-    function updateElapsedTime() {
-      var now = new Date();
-      var targetDate = new Date("2023-11-25 21:31:16"); // 设置目标时间
+    <script>
+      var getlastdate = document.getElementById("lastupdatedate").innerHTML;
+      var lastdate = new Date(parseInt(getlastdate));
 
-      var timeDiff = now.getTime() - targetDate.getTime(); // 计算时间差（毫秒）
-      var seconds = Math.floor(timeDiff / 1000) % 60;
-      var minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
-      var hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
-      var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      function updateElapsedTime() {
+        var now = new Date();
+        var targetDate = new Date("2023-11-25 21:31:16"); // 设置目标时间
 
-      // 更新时间差显示
-      document.getElementById("days").innerHTML = days;
-      document.getElementById("hours").innerHTML = hours;
-      document.getElementById("minutes").innerHTML = minutes;
-      document.getElementById("seconds").innerHTML = seconds;
-    }
+        var timeDiff = now.getTime() - targetDate.getTime(); // 计算时间差（毫秒）
+        var seconds = Math.floor(timeDiff / 1000) % 60;
+        var minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
+        var hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
+        var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-    setInterval(updateElapsedTime, 1000); // 每秒更新一次时间差
-  </script>
+        var lasttimeDiff = now.getTime() - lastdate.getTime(); // 计算时间差（毫秒）
+        var lastseconds = Math.floor(lasttimeDiff / 1000) % 60;
+        var lastminutes = Math.floor(lasttimeDiff / (1000 * 60)) % 60;
+        var lasthours = Math.floor(lasttimeDiff / (1000 * 60 * 60)) % 24;
+        var lastdays = Math.floor(lasttimeDiff / (1000 * 60 * 60 * 24));
+
+        // 更新已运行时间差显示
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        // 更新距离上次更新时间差显示
+        document.getElementById("lastdays").innerHTML = lastdays;
+        document.getElementById("lasthours").innerHTML = lasthours;
+        document.getElementById("lastminutes").innerHTML = lastminutes;
+        document.getElementById("lastseconds").innerHTML = lastseconds;
+      }
+
+      setInterval(updateElapsedTime, 1000); // 每秒更新一次时间差
+    </script>
+  
+    
+    <div class="widget-wrap">
+        <div class="widget">
+            <h3 class="widget-title">调用API</h3>
+            历史上的今天： <br>
+            <a id="lssdjt"></a>
+            每日一言： <br>
+            <a id="meiriyiyan"></a>
+        </div>
+    </div>
+    
+
+        <script>
+            fetch('https://zj.v.api.aa1.cn/api/bk/?type=json')
+                .then(response => response.json())
+                .then(data => {
+                    var lssdjt = document.getElementById("lssdjt");
+                    data.content.forEach((content, index) => {
+                        var onecontent = document.createElement("onecontent");
+                        onecontent.textContent = (index + 1) + ". " + content + "。";
+                        lssdjt.appendChild(onecontent);
+                        lssdjt.appendChild(document.createElement("br"));
+                    });
+                })
+                .catch(error => {
+                    var lssdjt = document.getElementById("lssdjt");
+                    lssdjt.textContent = "API调用出错！";
+                    lssdjt.appendChild(document.createElement("br"));
+                });
+
+
+
+            //每日一言api
+            function mryyapi() {
+                var mryy = new XMLHttpRequest();
+                // 设置请求方法和URL
+                mryy.open("GET", "https://v.api.aa1.cn/api/yiyan/index.php", true);
+                // 发送请求
+                mryy.send();
+                // 监听请求状态的改变
+                mryy.onreadystatechange = function () {
+                    if (mryy.readyState === 4 && mryy.status === 200) {
+                        var htmlResponse = mryy.responseText;
+                        // 将HTML代码赋值给<a>标签
+                        var link = document.getElementById("meiriyiyan");
+                        link.innerHTML = htmlResponse;
+                    } else {
+                        var link = document.getElementById("meiriyiyan");
+                        link.innerHTML = "API调用出错！";
+                    }
+                };
+            }
+
+            mryyapi();
+        </script>
   
   <div class="sticky">
     
@@ -175,14 +264,14 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/hexo/">
-                hexo
-                <div class="category-count">1</div>
-            </a>
-        
             <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">
                 实用笔记
                 <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/hexo/">
+                hexo
+                <div class="category-count">1</div>
             </a>
         
             <a class="category-link" href="/categories/%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">
@@ -194,6 +283,11 @@
                 行测学习笔记
                 <div class="category-count">4</div>
             </a>
+        
+            <a class="category-link" href="/categories/%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/">
+                主题修改
+                <div class="category-count">3</div>
+            </a>
         </div>
     </div>
   </div>
@@ -204,7 +298,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">标签</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hello-World/" rel="tag">Hello World</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cloudflare/" rel="tag">cloudflare</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hello-World/" rel="tag">Hello World</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cloudflare/" rel="tag">cloudflare</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo%E4%B8%BB%E9%A2%98/" rel="tag">hexo主题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vivia/" rel="tag">vivia</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
     </div>
   </div>
 
@@ -218,7 +312,7 @@
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">2 </div>
+          <div class="archive-count">5 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
@@ -237,6 +331,24 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
+          <a class="recent-link" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-2/" title="主题修改之修改侧边栏2" >
+            <div class="recent-link-text">
+              主题修改之修改侧边栏2
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-1/" title="主题修改之修改侧边栏1" >
+            <div class="recent-link-text">
+              主题修改之修改侧边栏1
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/12/05/zhu-ti-xiu-gai-zhi-zi-ti-he-shi-jian/" title="主题修改之字体和时间" >
+            <div class="recent-link-text">
+              主题修改之字体和时间
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2023/12/04/wen-ti-zhi-shuang-xi-tong-shi-jian-bu-tong-bu/" title="问题之双系统时间不同步" >
             <div class="recent-link-text">
               问题之双系统时间不同步
@@ -246,24 +358,6 @@
           <a class="recent-link" href="/2023/12/01/xing-ce-xue-xi-zhi-shu-xue-yun-suan-4/" title="行测学习之数学运算4——行程问题" >
             <div class="recent-link-text">
               行测学习之数学运算4——行程问题
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2023/11/30/xing-ce-xue-xi-zhi-shu-xue-yun-suan-3/" title="行测学习之数学运算3——经济利润问题" >
-            <div class="recent-link-text">
-              行测学习之数学运算3——经济利润问题
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2023/11/29/xing-ce-xue-xi-zhi-shu-xue-yun-suan-2/" title="行测学习之数学运算2——工程问题" >
-            <div class="recent-link-text">
-              行测学习之数学运算2——工程问题
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2023/11/28/xing-ce-xue-xi-zhi-shu-xue-yun-suan-1/" title="行测学习之数学运算1——方程与不等式" >
-            <div class="recent-link-text">
-              行测学习之数学运算1——方程与不等式
             </div>
           </a>
         
@@ -295,8 +389,65 @@
             <div class="dot-wrapper">
                 <div class="dot"></div>
             </div>
-            <div class="article-count">2 篇文章</div>
+            <div class="article-count">5 篇文章</div>
         </div>
+      
+      <a class="archive-article-link" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-2/" title="主题修改之修改侧边栏2">
+        <div class="date">12-06 00:43:40</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    主题修改之修改侧边栏2
+                
+            </div>
+        </div>
+        <div class="tags">
+            #hexo主题 #vivia
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-1/" title="主题修改之修改侧边栏1">
+        <div class="date">12-06 00:22:50</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    主题修改之修改侧边栏1
+                
+            </div>
+        </div>
+        <div class="tags">
+            #hexo主题 #vivia
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/12/05/zhu-ti-xiu-gai-zhi-zi-ti-he-shi-jian/" title="主题修改之字体和时间">
+        <div class="date">12-05 23:40:32</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    主题修改之字体和时间
+                
+            </div>
+        </div>
+        <div class="tags">
+            #hexo主题 #vivia
+        </div>
+      </a>
+    
+      
       
       <a class="archive-article-link" href="/2023/12/04/wen-ti-zhi-shuang-xi-tong-shi-jian-bu-tong-bu/" title="问题之双系统时间不同步">
         <div class="date">12-04 23:42:10</div>
