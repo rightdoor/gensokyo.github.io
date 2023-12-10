@@ -14,20 +14,26 @@
   
 
   
-  <title>随笔小记</title>
+  <title>Hexo+Gitea+Jenkins自动部署博客 | 随笔小记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/LXGWWenKai-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="写下一些有用的笔记。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="随笔小记">
-<meta property="og:url" content="http://rightdoor.github.io/index.html">
+  <meta name="description" content="hexo不能一边推送一边自动将网站部署到nginx，所以使用Docker安装的Gitea和Jenkins组合来自动部署静态页面。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Gitea+Jenkins自动部署博客">
+<meta property="og:url" content="http://rightdoor.github.io/2023/12/10/hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke/index.html">
 <meta property="og:site_name" content="随笔小记">
-<meta property="og:description" content="写下一些有用的笔记。">
+<meta property="og:description" content="hexo不能一边推送一边自动将网站部署到nginx，所以使用Docker安装的Gitea和Jenkins组合来自动部署静态页面。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-10T10:33:18.000Z">
+<meta property="article:modified_time" content="2023-12-10T11:18:45.572Z">
 <meta property="article:author" content="rightdoor">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Gitea">
+<meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
   
   
@@ -42,14 +48,14 @@
   
   
     
-<div id="banner" class=" is_home ">
+<div id="banner" class="">
   <img src="/assets/images/banner.jpg" itemprop="image">
   <div id="banner-dim"></div>
 </div>
  
    
   <div id="main-grid" class="shadow   ">
-    <div id="nav" class=" is_home "  >
+    <div id="nav" class=""  >
       <navbar id="navbar">
   <nav id="title-nav">
     <a href="/">
@@ -375,11 +381,12 @@
 </sidebar>
     </div>
     <div id="content-body">
-      
-   
+       
 
 
 <article id="post-hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
    
   <div class="article-inner">
     <div class="article-main">
@@ -389,8 +396,8 @@
   <div class="main-title-dot"></div>
   
     
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/10/hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke/">Hexo+Gitea+Jenkins自动部署博客</a>
+      <h1 class="p-name article-title" itemprop="headline name">
+        Hexo+Gitea+Jenkins自动部署博客
       </h1>
     
   
@@ -419,6 +426,34 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <p>hexo不能一边推送一边自动将网站部署到nginx，所以使用Docker安装的Gitea和Jenkins组合来自动部署静态页面。</p>
+<span id="more"></span>
+
+<h1 id="自动化部署Hexo博客"><a href="#自动化部署Hexo博客" class="headerlink" title="自动化部署Hexo博客"></a>自动化部署Hexo博客</h1><h2 id="1、Docker安装Gitea和Jenkins"><a href="#1、Docker安装Gitea和Jenkins" class="headerlink" title="1、Docker安装Gitea和Jenkins"></a>1、Docker安装Gitea和Jenkins</h2><p>在Jenkins部署时记得映射一个目录指向nginx的静态页面文件夹。</p>
+<p>在Gitea部署完成后修改<code>app.ini</code>文件。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[webhook]</span></span><br><span class="line"><span class="attr">ALLOWED_HOST_LIST</span> = *</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、Gitea"><a href="#2、Gitea" class="headerlink" title="2、Gitea"></a>2、Gitea</h2><p>1、设置好Gitea令牌，保存好。4a61efe6ec5530f1579e28b4a7f7f204b095a78b</p>
+<p>2、新建仓库，设置好Web钩子。</p>
+<p>创建选择Gitea，将url设置为以下格式：</p>
+<p><code>http://192.168.31.101:18580/generic-webhook-trigger/invoke?token=[自定义token]</code></p>
+<h2 id="3、Jenkins"><a href="#3、Jenkins" class="headerlink" title="3、Jenkins"></a>3、Jenkins</h2><p>进入页面<code>Dashboard</code>-&gt;<code>系统管理</code>-&gt;<code>插件管理</code>-&gt;<code>available plugins</code></p>
+<p>安装插件<code>NodeJS Plugin</code>和<code>Generic Webhook Trigger Plugin</code>和<code>Gitea Plugin</code>。</p>
+<p>进入页面<code>Dashboard</code>-&gt;<code>系统管理</code>-&gt;<code>全局工具配置</code>-&gt;<code>NodeJS安装</code></p>
+<p>选择好node版本，<code>Global npm packages to install</code>填写<code>hexo</code>，保存。</p>
+<p>进入页面<code>Dashboard</code>-&gt;<code>系统管理</code>-&gt;<code>凭据</code></p>
+<p>点击System，点击<code>Add domain</code>，创建好后点击<code>Add Credentials</code>。</p>
+<p>类型选择<code>Gitea Personal Access Token</code>，范围选择全局，填写好Token保存。</p>
+<p>返回首页新建任务，选择<code>构建一个自由风格的软件项目</code>。</p>
+<p>源码管理填写好Gitea仓库地址，<code>Credentials</code>选择更改创建好的凭据，填写好分支。</p>
+<p>构建触发器选择<code>Generic Webhook Trigger</code>，只填写Token，内容为前面Web钩子自定义的Token。</p>
+<p>构建环境选择<code>Provide Node &amp; npm bin/ folder to PATH</code>，选择刚刚设置好的node环境。</p>
+<p><code>Build Steps</code>选择<code>执行 shell</code>。</p>
+<p>参考：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果已经有node_modules了，仅仅是添加文章，可以去掉npm install</span></span><br><span class="line">npm install</span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">rm -rf nginx的静态页面文件夹</span><br><span class="line">mv public nginx的静态页面文件夹</span><br></pre></td></tr></table></figure>
+
+<p>自定义好shell脚本后保存，点击立即构建。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>当我们推送hexo项目到Gitea仓库时，Jenkins也会自动构建然后把静态文件移动到Nginx网站目录。</p>
+
         
       </div>
 
@@ -426,639 +461,37 @@
     </div>
     
      
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/10/hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/12/09/linux-kong-zhi-cpu-feng-shan-zhuan-su/"
+      title="Linux控制CPU风扇转速"
+     >
+
+    <p class="title-text">
+      
+        Linux控制CPU风扇转速
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
   
 </article>
 
 
-
-
-
-   
-
-
-<article id="post-linux-kong-zhi-cpu-feng-shan-zhuan-su" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/09/linux-kong-zhi-cpu-feng-shan-zhuan-su/">Linux控制CPU风扇转速</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-09T10:07:49.000Z" itemprop="datePublished">2023-12-09 18:07:49</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">实用笔记</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            561 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>在不想更改BIOS设置的情况下，可以通过fancontrol应用来控制CPU风扇转速。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/09/linux-kong-zhi-cpu-feng-shan-zhuan-su/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-ip-dui-ying-zi-wang-fan-wei-cha-xun" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/07/ip-dui-ying-zi-wang-fan-wei-cha-xun/">IP对应子网范围查询</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-07T15:11:28.000Z" itemprop="datePublished">2023-12-07 23:11:28</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.9k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP%E5%AD%90%E7%BD%91/" rel="tag">IP子网</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>记录IP子网范围，方便查询。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/07/ip-dui-ying-zi-wang-fan-wei-cha-xun/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-2/">主题修改之修改侧边栏2</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-05T16:43:40.000Z" itemprop="datePublished">2023-12-06 00:43:40</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/">主题修改</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E4%B8%BB%E9%A2%98/" rel="tag">hexo主题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vivia/" rel="tag">vivia</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>修改添加侧边栏，这次添加调用api的侧边小组件，，只是编写简单的前端代码。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-2/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-1/">主题修改之修改侧边栏1</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-05T16:22:50.000Z" itemprop="datePublished">2023-12-06 00:22:50</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/">主题修改</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3.5k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E4%B8%BB%E9%A2%98/" rel="tag">hexo主题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vivia/" rel="tag">vivia</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>修改添加侧边栏，这次使用hexo内的数据来显示文章数、总字数等。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-1/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-zhu-ti-xiu-gai-zhi-zi-ti-he-shi-jian" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/05/zhu-ti-xiu-gai-zhi-zi-ti-he-shi-jian/">主题修改之字体和时间</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-05T15:40:32.000Z" itemprop="datePublished">2023-12-05 23:40:32</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/">主题修改</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.6k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E4%B8%BB%E9%A2%98/" rel="tag">hexo主题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vivia/" rel="tag">vivia</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>记录修改主题部分内容的方法，这次修改主题字体和时间显示格式为<code>YYYY-MM-DD HH:mm:ss</code>。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/05/zhu-ti-xiu-gai-zhi-zi-ti-he-shi-jian/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-wen-ti-zhi-shuang-xi-tong-shi-jian-bu-tong-bu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/04/wen-ti-zhi-shuang-xi-tong-shi-jian-bu-tong-bu/">问题之双系统时间不同步</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-04T15:42:10.000Z" itemprop="datePublished">2023-12-04 23:42:10</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">问题合集</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            362 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>在双系统环境下，Linux 和 Windows 的时间不同步是一个常见的问题。这是因为 Linux 默认将硬件时钟（RTC）视为 UTC（协调世界时），而 Windows 将其视为本地时间。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/04/wen-ti-zhi-shuang-xi-tong-shi-jian-bu-tong-bu/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-xing-ce-xue-xi-zhi-shu-xue-yun-suan-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/01/xing-ce-xue-xi-zhi-shu-xue-yun-suan-4/">行测学习之数学运算4——行程问题</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-01T10:21:15.000Z" itemprop="datePublished">2023-12-01 18:21:15</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">行测学习笔记</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            994 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>行程问题是数量关系部分常见的考点和难点，通常分为：基础行程问题、追及相遇问题、间歇变速问题、流水行船问题。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/01/xing-ce-xue-xi-zhi-shu-xue-yun-suan-4/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-xing-ce-xue-xi-zhi-shu-xue-yun-suan-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/11/30/xing-ce-xue-xi-zhi-shu-xue-yun-suan-3/">行测学习之数学运算3——经济利润问题</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-11-30T10:04:35.000Z" itemprop="datePublished">2023-11-30 18:04:35</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">行测学习笔记</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            358 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>经济利润问题与实际生活相结合，考察比较灵活。利润折扣问题涉及成本、收入、折扣等，是常考类型。还有分段计费问题和方案优化问题。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/11/30/xing-ce-xue-xi-zhi-shu-xue-yun-suan-3/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-   
-
-
-<article id="post-xing-ce-xue-xi-zhi-shu-xue-yun-suan-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/11/29/xing-ce-xue-xi-zhi-shu-xue-yun-suan-2/">行测学习之数学运算2——工程问题</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-11-29T02:58:56.000Z" itemprop="datePublished">2023-11-29 10:58:56</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">行测学习笔记</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>比例问题是涉及比例关系的应用题的合称，包含有工程问题、溶液问题、牛吃草问题和钟表问题等。其中工程问题考的最多，其余的偶尔有考到。</p>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/11/29/xing-ce-xue-xi-zhi-shu-xue-yun-suan-2/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-  <nav id="page-nav">
-    <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
-    <a id="prev-btn" class="page-nav-btn disabled" href=" /  ">
-      <i class="fa-solid fa-angle-left"></i>
-    </a>
-    <div id="num-bar">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a>  
-    </div>
-    <a id="next-btn" class="page-nav-btn " href="/page/2/">
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-  </nav>
 
 
     </div>
