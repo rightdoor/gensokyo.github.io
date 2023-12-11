@@ -28,11 +28,12 @@
 <meta property="og:description" content="hexo不能一边推送一边自动将网站部署到nginx，所以使用Docker安装的Gitea和Jenkins组合来自动部署静态页面。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-10T10:33:18.000Z">
-<meta property="article:modified_time" content="2023-12-10T11:18:45.572Z">
+<meta property="article:modified_time" content="2023-12-11T08:50:54.794Z">
 <meta property="article:author" content="rightdoor">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="Gitea">
+<meta property="article:tag" content="CI&#x2F;CD">
 <meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
   
@@ -143,10 +144,10 @@
       <h3 class="widget-title">统计信息</h3>
 
       
-        总文章数：<a>14</a> 篇<br>
-        总字数：<a>15723</a> 字<br>
-        最近更新时间：<br><a>2023-12-10 18:33:18</a><br>
-        <a id="lastupdatedate" style="display: none;">1702204398000</a>
+        总文章数：<a>15</a> 篇<br>
+        总字数：<a>18726</a> 字<br>
+        最近更新时间：<br><a>2023-12-11 16:36:23</a><br>
+        <a id="lastupdatedate" style="display: none;">1702283783000</a>
 
         距离上次更新：<br>
         <a>
@@ -282,17 +283,17 @@
         
             <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">
                 实用笔记
-                <div class="category-count">4</div>
-            </a>
-        
-            <a class="category-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                行测学习笔记
-                <div class="category-count">4</div>
+                <div class="category-count">5</div>
             </a>
         
             <a class="category-link" href="/categories/%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">
                 问题合集
                 <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E8%A1%8C%E6%B5%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                行测学习笔记
+                <div class="category-count">4</div>
             </a>
         
             <a class="category-link" href="/categories/%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/">
@@ -309,7 +310,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">标签</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Gitea/" rel="tag">Gitea</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hello-World/" rel="tag">Hello World</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/IP%E5%AD%90%E7%BD%91/" rel="tag">IP子网</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cloudflare/" rel="tag">cloudflare</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo%E4%B8%BB%E9%A2%98/" rel="tag">hexo主题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vivia/" rel="tag">vivia</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CI-CD/" rel="tag">CI&#x2F;CD</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Drone/" rel="tag">Drone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Gitea/" rel="tag">Gitea</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Hello-World/" rel="tag">Hello World</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/IP%E5%AD%90%E7%BD%91/" rel="tag">IP子网</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cloudflare/" rel="tag">cloudflare</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo%E4%B8%BB%E9%A2%98/" rel="tag">hexo主题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vivia/" rel="tag">vivia</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%A1%8C%E6%B5%8B/" rel="tag">行测</a></li></ul>
     </div>
   </div>
 
@@ -323,7 +324,7 @@
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">8 </div>
+          <div class="archive-count">9 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
@@ -341,6 +342,12 @@
     <div class="widget">
       <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2023/12/11/hexo-gitea-drone-zi-dong-bu-shu-bo-ke/" title="Hexo+Gitea+Drone自动部署博客" >
+            <div class="recent-link-text">
+              Hexo+Gitea+Drone自动部署博客
+            </div>
+          </a>
         
           <a class="recent-link" href="/2023/12/10/hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke/" title="Hexo+Gitea+Jenkins自动部署博客" >
             <div class="recent-link-text">
@@ -363,12 +370,6 @@
           <a class="recent-link" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-2/" title="主题修改之修改侧边栏2" >
             <div class="recent-link-text">
               主题修改之修改侧边栏2
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2023/12/06/zhu-ti-xiu-gai-zhi-xiu-gai-ce-bian-lan-1/" title="主题修改之修改侧边栏1" >
-            <div class="recent-link-text">
-              主题修改之修改侧边栏1
             </div>
           </a>
         
@@ -420,7 +421,7 @@
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitea/" rel="tag">Gitea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/" rel="tag">CI&#x2F;CD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitea/" rel="tag">Gitea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
@@ -432,7 +433,7 @@
 <p>在Gitea部署完成后修改<code>app.ini</code>文件。</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[webhook]</span></span><br><span class="line"><span class="attr">ALLOWED_HOST_LIST</span> = *</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、Gitea"><a href="#2、Gitea" class="headerlink" title="2、Gitea"></a>2、Gitea</h2><p>1、设置好Gitea令牌，保存好。4a61efe6ec5530f1579e28b4a7f7f204b095a78b</p>
+<h2 id="2、Gitea"><a href="#2、Gitea" class="headerlink" title="2、Gitea"></a>2、Gitea</h2><p>1、设置好Gitea令牌，保存好。</p>
 <p>2、新建仓库，设置好Web钩子。</p>
 <p>创建选择Gitea，将url设置为以下格式：</p>
 <p><code>http://192.168.31.101:18580/generic-webhook-trigger/invoke?token=[自定义token]</code></p>
@@ -465,10 +466,15 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2023/12/11/hexo-gitea-drone-zi-dong-bu-shu-bo-ke/"
+      title="Hexo+Gitea+Drone自动部署博客"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        Hexo+Gitea+Drone自动部署博客
         
     </p>
   </a>
