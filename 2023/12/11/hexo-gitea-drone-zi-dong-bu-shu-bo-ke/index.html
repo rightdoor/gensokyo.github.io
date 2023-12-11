@@ -28,7 +28,7 @@
 <meta property="og:description" content="前边介绍了使用Jenkins自动构建，但是用下来后发现占用实在太大，加个node环境内存占用基本就到了8G。这对个人来说不太好，因为云服务器的内存想要扩充得花更多的钱。所以，接下来我们使用一个轻量级的CI&#x2F;CD自动构建平台Drone，来减少服务器负担。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-11T08:36:23.000Z">
-<meta property="article:modified_time" content="2023-12-11T09:38:46.730Z">
+<meta property="article:modified_time" content="2023-12-11T09:57:35.750Z">
 <meta property="article:author" content="rightdoor">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="hexo">
@@ -145,7 +145,7 @@
 
       
         总文章数：<a>15</a> 篇<br>
-        总字数：<a>18726</a> 字<br>
+        总字数：<a>18731</a> 字<br>
         最近更新时间：<br><a>2023-12-11 16:36:23</a><br>
         <a id="lastupdatedate" style="display: none;">1702283783000</a>
 
@@ -276,14 +276,14 @@
                 <div class="category-count">1</div>
             </a>
         
-            <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                计算机网络
-                <div class="category-count">1</div>
-            </a>
-        
             <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">
                 实用笔记
                 <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                计算机网络
+                <div class="category-count">1</div>
             </a>
         
             <a class="category-link" href="/categories/%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">
@@ -459,7 +459,7 @@
 <blockquote>
 <p>记得将注释内容删除，以防出现其他错误。</p>
 </blockquote>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>在保存好<code>.drone.yml</code>文件时，Drone也开始了自动构建，此时内存占用也才不过100m左右。相对于Jenkins来说，使用步骤是从图形化到代码化，总体而言简单了不少。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>在保存好<code>.drone.yml</code>文件时，Drone也开始了自动构建，此时内存占用也才不过200m-300m左右。相对于Jenkins来说，使用步骤是从图形化到代码化，总体而言简单了不少。</p>
 
         
       </div>
