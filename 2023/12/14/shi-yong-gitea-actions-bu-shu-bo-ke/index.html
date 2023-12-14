@@ -14,23 +14,29 @@
   
 
   
-  <title>Linux控制CPU风扇转速 | 随笔小记</title>
+  <title>使用Gitea Actions部署博客 | 随笔小记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/LXGWWenKai-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="在不想更改BIOS设置的情况下，可以通过fancontrol应用来控制CPU风扇转速。">
+  <meta name="description" content="Gitea在1.19版本以后就内置了CI&#x2F;CD解决方案，Gitea Actions与GitHub Actions相似且兼容。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux控制CPU风扇转速">
-<meta property="og:url" content="http://rightdoor.github.io/2023/12/09/linux-kong-zhi-cpu-feng-shan-zhuan-su/index.html">
+<meta property="og:title" content="使用Gitea Actions部署博客">
+<meta property="og:url" content="http://rightdoor.github.io/2023/12/14/shi-yong-gitea-actions-bu-shu-bo-ke/index.html">
 <meta property="og:site_name" content="随笔小记">
-<meta property="og:description" content="在不想更改BIOS设置的情况下，可以通过fancontrol应用来控制CPU风扇转速。">
+<meta property="og:description" content="Gitea在1.19版本以后就内置了CI&#x2F;CD解决方案，Gitea Actions与GitHub Actions相似且兼容。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-09T10:07:49.000Z">
-<meta property="article:modified_time" content="2023-12-09T10:22:57.361Z">
+<meta property="article:published_time" content="2023-12-14T13:14:58.000Z">
+<meta property="article:modified_time" content="2023-12-14T13:42:18.604Z">
 <meta property="article:author" content="rightdoor">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Gitea">
+<meta property="article:tag" content="CI&#x2F;CD">
+<meta property="article:tag" content="Gitea Actions">
+<meta property="article:tag" content="Github Actions">
+<meta property="article:tag" content="Act Runner">
 <meta name="twitter:card" content="summary">
   
   
@@ -381,7 +387,7 @@
        
 
 
-<article id="post-linux-kong-zhi-cpu-feng-shan-zhuan-su" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-shi-yong-gitea-actions-bu-shu-bo-ke" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -394,7 +400,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        Linux控制CPU风扇转速
+        使用Gitea Actions部署博客
       </h1>
     
   
@@ -402,7 +408,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-09T10:07:49.000Z" itemprop="datePublished">2023-12-09 18:07:49</time>
+  <time class="dt-published" datetime="2023-12-14T13:14:58.000Z" itemprop="datePublished">2023-12-14 21:14:58</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -413,30 +419,36 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            561 词 
+            3.8k 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Act-Runner/" rel="tag">Act Runner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/" rel="tag">CI&#x2F;CD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitea/" rel="tag">Gitea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitea-Actions/" rel="tag">Gitea Actions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github-Actions/" rel="tag">Github Actions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>在不想更改BIOS设置的情况下，可以通过fancontrol应用来控制CPU风扇转速。</p>
+          <p>Gitea在1.19版本以后就内置了CI&#x2F;CD解决方案，Gitea Actions与GitHub Actions相似且兼容。</p>
 <span id="more"></span>
 
-<h1 id="fancontrol控制CPU风扇转速"><a href="#fancontrol控制CPU风扇转速" class="headerlink" title="fancontrol控制CPU风扇转速"></a>fancontrol控制CPU风扇转速</h1><h2 id="1、安装必备应用"><a href="#1、安装必备应用" class="headerlink" title="1、安装必备应用"></a>1、安装必备应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lm-sensors fancontrol</span><br></pre></td></tr></table></figure>
+<h1 id="Gitea-Actions"><a href="#Gitea-Actions" class="headerlink" title="Gitea Actions"></a>Gitea Actions</h1><h2 id="Gitea设置"><a href="#Gitea设置" class="headerlink" title="Gitea设置"></a>Gitea设置</h2><h3 id="1、1-21-0之前的版本需要开启功能"><a href="#1、1-21-0之前的版本需要开启功能" class="headerlink" title="1、1.21.0之前的版本需要开启功能"></a>1、1.21.0之前的版本需要开启功能</h3><p>在1.21.0之前的版本需要在<code>app.ini</code>文件中添加配置。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[actions]</span></span><br><span class="line"><span class="attr">ENABLED</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="2、设置"><a href="#2、设置" class="headerlink" title="2、设置"></a>2、设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动探测硬件</span></span><br><span class="line"><span class="built_in">yes</span> | sudo sensors-detect</span><br><span class="line"><span class="comment"># 检测风扇</span></span><br><span class="line">sudo fancontrol</span><br></pre></td></tr></table></figure>
+<p>在1.21.0之后的版本就不用再添加配置了，默认是开启的。</p>
+<h3 id="2、创建Runner-Token"><a href="#2、创建Runner-Token" class="headerlink" title="2、创建Runner Token"></a>2、创建Runner Token</h3><p>在设置中找到<code>Actions</code>-&gt;<code>Runners</code>，点击<code>创建Runner</code>，保存好生成的<code>REGISTRATION TOKEN</code>。</p>
+<h2 id="Docker部署Runner"><a href="#Docker部署Runner" class="headerlink" title="Docker部署Runner"></a>Docker部署Runner</h2><p>先创建配置文件<code>config.yaml</code>，默认配置如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example configuration file, it&#x27;s safe to copy this as the default config file without any modification.</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log:</span></span><br><span class="line">  <span class="comment"># The level of logging, can be trace, debug, info, warn, error, fatal</span></span><br><span class="line">  <span class="attr">level:</span> <span class="string">info</span></span><br><span class="line"></span><br><span class="line"><span class="attr">runner:</span></span><br><span class="line">  <span class="comment"># Where to store the registration result.</span></span><br><span class="line">  <span class="attr">file:</span> <span class="string">.runner</span></span><br><span class="line">  <span class="comment"># Execute how many tasks concurrently at the same time.</span></span><br><span class="line">  <span class="attr">capacity:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># Extra environment variables to run jobs.</span></span><br><span class="line">  <span class="attr">envs:</span></span><br><span class="line">    <span class="attr">A_TEST_ENV_NAME_1:</span> <span class="string">a_test_env_value_1</span></span><br><span class="line">    <span class="attr">A_TEST_ENV_NAME_2:</span> <span class="string">a_test_env_value_2</span></span><br><span class="line">  <span class="comment"># Extra environment variables to run jobs from a file.</span></span><br><span class="line">  <span class="comment"># It will be ignored if it&#x27;s empty or the file doesn&#x27;t exist.</span></span><br><span class="line">  <span class="attr">env_file:</span> <span class="string">.env</span></span><br><span class="line">  <span class="comment"># The timeout for a job to be finished.</span></span><br><span class="line">  <span class="comment"># Please note that the Gitea instance also has a timeout (3h by default) for the job.</span></span><br><span class="line">  <span class="comment"># So the job could be stopped by the Gitea instance if it&#x27;s timeout is shorter than this.</span></span><br><span class="line">  <span class="attr">timeout:</span> <span class="string">3h</span></span><br><span class="line">  <span class="comment"># Whether skip verifying the TLS certificate of the Gitea instance.</span></span><br><span class="line">  <span class="attr">insecure:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># The timeout for fetching the job from the Gitea instance.</span></span><br><span class="line">  <span class="attr">fetch_timeout:</span> <span class="string">5s</span></span><br><span class="line">  <span class="comment"># The interval for fetching the job from the Gitea instance.</span></span><br><span class="line">  <span class="attr">fetch_interval:</span> <span class="string">2s</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="comment"># Enable cache server to use actions/cache.</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># The directory to store the cache data.</span></span><br><span class="line">  <span class="comment"># If it&#x27;s empty, the cache data will be stored in $HOME/.cache/actcache.</span></span><br><span class="line">  <span class="attr">dir:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="comment"># The host of the cache server.</span></span><br><span class="line">  <span class="comment"># It&#x27;s not for the address to listen, but the address to connect from job containers.</span></span><br><span class="line">  <span class="comment"># So 0.0.0.0 is a bad choice, leave it empty to detect automatically.</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="comment"># The port of the cache server.</span></span><br><span class="line">  <span class="comment"># 0 means to use a random available port.</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">container:</span></span><br><span class="line">  <span class="comment"># Specifies the network to which the container will connect.</span></span><br><span class="line">  <span class="comment"># Could be host, bridge or the name of a custom network.</span></span><br><span class="line">  <span class="comment"># If it&#x27;s empty, act_runner will create a network automatically.</span></span><br><span class="line">  <span class="attr">network:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="comment"># Whether to use privileged mode or not when launching task containers (privileged mode is required for Docker-in-Docker).</span></span><br><span class="line">  <span class="attr">privileged:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># And other options to be used when the container is started (eg, --add-host=my.gitea.url:host-gateway).</span></span><br><span class="line">  <span class="attr">options:</span></span><br><span class="line">  <span class="comment"># The parent directory of a job&#x27;s working directory.</span></span><br><span class="line">  <span class="comment"># If it&#x27;s empty, /workspace will be used.</span></span><br><span class="line">  <span class="attr">workdir_parent:</span></span><br></pre></td></tr></table></figure>
 
-<p>检测风扇的时候默认回车即可。</p>
-<p>遇到<code>Do you want to set up its configuration file new?</code>选择y。</p>
-<p>遇到<code>waht should be the path to your fancontrol config file file?</code>输入<code>/etc/fancontrol</code></p>
-<p>到多选项时选择要设置的风扇设备名那个选项。</p>
-<p>接着给出<code>Devices</code>表，让我们选择让哪个核心作为温度依据，选择1。</p>
-<p>接着显示设置低于多少度时最低速度（设置为30）、高于多少度时最高速度（设置为70）、超出最高限制时风扇转速（设置为255）。</p>
-<p>接到多选项，选择保存并退出。</p>
-<h2 id="3、启用"><a href="#3、启用" class="headerlink" title="3、启用"></a>3、启用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动</span></span><br><span class="line"><span class="built_in">nohup</span> fancontrol &amp;</span><br><span class="line"><span class="comment"># 设置开机启动</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> fancontrol</span><br><span class="line"><span class="comment"># 可以修改配置文件</span></span><br><span class="line">sudo nano /etc/fancontrol</span><br><span class="line"><span class="comment"># 重启服务生效</span></span><br><span class="line">sudo systemctl restart fancontrol</span><br></pre></td></tr></table></figure>
+<p>创建docker容器，将<code>config.yaml</code>挂载到容器对应的位置<code>/config.yaml</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.8&quot;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">runner:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">gitea/act_runner:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">act-runner</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">CONFIG_FILE:</span> <span class="string">/config.yaml</span></span><br><span class="line">      <span class="attr">GITEA_INSTANCE_URL:</span> <span class="string">&quot;&lt;这里填写Gitea服务器地址&gt;&quot;</span></span><br><span class="line">      <span class="attr">GITEA_RUNNER_REGISTRATION_TOKEN:</span> <span class="string">&quot;&lt;填写生成好的REGISTRATION TOKEN&gt;&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config.yaml:/config.yaml</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure>
+
+<p>启动即可。</p>
+<h2 id="仓库设置"><a href="#仓库设置" class="headerlink" title="仓库设置"></a>仓库设置</h2><p>选择要自动构建的仓库，<code>设置</code>-&gt;<code>高级设置</code>-&gt;<code>Actions</code>，勾选<code>启用Actions</code>。</p>
+<p>然后仓库主目录创建gitea文件夹和脚本文件，文件结构：<code>仓库名/.gitea/workflows/demo.yaml</code>，依次创建并编写好脚本文件即可。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>容器目录<code>/data</code>下的<code>.runner</code>文件可以修改Runner的Job镜像配置。</p>
+<h1 id="官方演示代码"><a href="#官方演示代码" class="headerlink" title="官方演示代码"></a>官方演示代码</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Gitea</span> <span class="string">Actions</span> <span class="string">Demo</span></span><br><span class="line"><span class="attr">run-name:</span> <span class="string">$&#123;&#123;</span> <span class="string">gitea.actor</span> <span class="string">&#125;&#125;</span> <span class="string">is</span> <span class="string">testing</span> <span class="string">out</span> <span class="string">Gitea</span> <span class="string">Actions</span> <span class="string">🚀</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">push</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">Explore-Gitea-Actions:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🎉 The job was automatically triggered by a $<span class="template-variable">&#123;&#123; gitea.event_name &#125;&#125;</span> event.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🐧 This job is now running on a $<span class="template-variable">&#123;&#123; runner.os &#125;&#125;</span> server hosted by Gitea!&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🔎 The name of your branch is $<span class="template-variable">&#123;&#123; gitea.ref &#125;&#125;</span> and your repository is $<span class="template-variable">&#123;&#123; gitea.repository &#125;&#125;</span>.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">out</span> <span class="string">repository</span> <span class="string">code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;💡 The $<span class="template-variable">&#123;&#123; gitea.repository &#125;&#125;</span> repository has been cloned to the runner.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🖥️ The workflow is now ready to test your code on the runner.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">List</span> <span class="string">files</span> <span class="string">in</span> <span class="string">the</span> <span class="string">repository</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          ls $&#123;&#123; gitea.workspace &#125;&#125;</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🍏 This job&#x27;s status is $<span class="template-variable">&#123;&#123; job.status &#125;&#125;</span>.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>当每次提交文件后，Gitea Action就会自动根据脚本进行构建。</p>
 
         
       </div>
@@ -449,27 +461,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2023/12/10/hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke/"
-      title="Hexo+Gitea+Jenkins自动部署博客"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        Hexo+Gitea+Jenkins自动部署博客
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2023/12/07/ip-dui-ying-zi-wang-fan-wei-cha-xun/"
-      title="IP对应子网范围查询"
+      href="/2023/12/11/hexo-gitea-drone-zi-dong-bu-shu-bo-ke/"
+      title="Hexo+Gitea+Drone自动部署博客"
      >
 
     <p class="title-text">
       
-        IP对应子网范围查询
+        Hexo+Gitea+Drone自动部署博客
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
