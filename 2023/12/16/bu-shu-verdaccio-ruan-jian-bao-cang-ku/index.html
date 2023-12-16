@@ -14,20 +14,26 @@
   
 
   
-  <title>标签: CI/CD | 随笔小记</title>
+  <title>部署Verdaccio软件包仓库 | 随笔小记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/LXGWWenKai-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="写下一些有用的笔记。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="随笔小记">
-<meta property="og:url" content="http://rightdoor.github.io/tags/CI-CD/index.html">
+  <meta name="description" content="Verdaccio是一个方便、灵活和安全的工具，用于构建和管理私有的npm包管理服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署Verdaccio软件包仓库">
+<meta property="og:url" content="http://rightdoor.github.io/2023/12/16/bu-shu-verdaccio-ruan-jian-bao-cang-ku/index.html">
 <meta property="og:site_name" content="随笔小记">
-<meta property="og:description" content="写下一些有用的笔记。">
+<meta property="og:description" content="Verdaccio是一个方便、灵活和安全的工具，用于构建和管理私有的npm包管理服务。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-16T08:19:30.000Z">
+<meta property="article:modified_time" content="2023-12-16T08:20:48.578Z">
 <meta property="article:author" content="rightdoor">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="仓库管理">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="Verdacci">
 <meta name="twitter:card" content="summary">
   
   
@@ -377,82 +383,119 @@
     <div id="content-body">
        
 
-<div class="archive-main-card">
-    <div class="archive-top">
-      <div class="main-title-bar">
-        <div class="main-title-dot"></div>
-        <h1 class="article-title">归档</h1>
-      </div>    
+
+<article id="post-bu-shu-verdaccio-ruan-jian-bao-cang-ku" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        部署Verdaccio软件包仓库
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-16T08:19:30.000Z" itemprop="datePublished">2023-12-16 16:19:30</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">实用笔记</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Verdacci/" rel="tag">Verdacci</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/" rel="tag">仓库管理</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>Verdaccio是一个方便、灵活和安全的工具，用于构建和管理私有的npm包管理服务。</p>
+<span id="more"></span>
+
+<h1 id="Verdaccio"><a href="#Verdaccio" class="headerlink" title="Verdaccio"></a>Verdaccio</h1><h2 id="1、创建verdaccio文件目录"><a href="#1、创建verdaccio文件目录" class="headerlink" title="1、创建verdaccio文件目录"></a>1、创建verdaccio文件目录</h2><p>格式如下所示：</p>
+<ul>
+<li>verdaccio<ul>
+<li>conf<ul>
+<li>config.yaml</li>
+</ul>
+</li>
+<li>plugins</li>
+<li>storage</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、编写配置文件config-yaml"><a href="#2、编写配置文件config-yaml" class="headerlink" title="2、编写配置文件config.yaml"></a>2、编写配置文件config.yaml</h2><p>模板如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置包文件存储位置</span></span><br><span class="line"><span class="attr">storage:</span> <span class="string">/verdaccio/storage</span></span><br><span class="line"><span class="comment"># 设置插件存储位置</span></span><br><span class="line"><span class="attr">plugins:</span> <span class="string">/verdaccio/plugins</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置仓库名称</span></span><br><span class="line"><span class="attr">web:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">本地Verdaccio仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 密码存放的位置</span></span><br><span class="line"><span class="attr">auth:</span></span><br><span class="line">  <span class="attr">htpasswd:</span> </span><br><span class="line">    <span class="attr">file:</span> <span class="string">/verdaccio/conf/htpasswd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 外部仓库地址</span></span><br><span class="line"><span class="attr">uplinks:</span></span><br><span class="line">  <span class="attr">taobao:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://registry.npm.taobao.org/</span></span><br><span class="line">    <span class="attr">cache:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">maxage:</span> <span class="string">30m</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置软件包权限</span></span><br><span class="line"><span class="attr">packages:</span></span><br><span class="line">  <span class="string">&#x27;@*/*&#x27;</span><span class="string">:</span></span><br><span class="line">    <span class="attr">access:</span> <span class="string">$all</span></span><br><span class="line">    <span class="attr">publish:</span> <span class="string">$authenticated</span></span><br><span class="line">    <span class="attr">unpulish:</span> <span class="string">$authenticated</span></span><br><span class="line">    <span class="attr">proxy:</span> <span class="string">taobao</span></span><br><span class="line">  <span class="string">&#x27;**&#x27;</span><span class="string">:</span></span><br><span class="line">    <span class="attr">access:</span> <span class="string">$all</span></span><br><span class="line">    <span class="attr">publish:</span> <span class="string">$authenticated</span></span><br><span class="line">    <span class="attr">unpulish:</span> <span class="string">$authenticated</span></span><br><span class="line">    <span class="attr">proxy:</span> <span class="string">taobao</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">keepAliveTimeout:</span> <span class="number">60</span></span><br><span class="line"></span><br><span class="line"><span class="attr">middlewares:</span></span><br><span class="line">  <span class="attr">audit:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">logs:</span> &#123; <span class="attr">type:</span> <span class="string">stdout</span>, <span class="attr">format:</span> <span class="string">pretty</span>, <span class="attr">level:</span> <span class="string">http</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 监听端口</span></span><br><span class="line"><span class="attr">listen:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:4873</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置包最大上传大小</span></span><br><span class="line"><span class="attr">max_body_size:</span> <span class="string">1000mb</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、Docker-compose"><a href="#3、Docker-compose" class="headerlink" title="3、Docker-compose"></a>3、Docker-compose</h2><p>更改文件夹用户和用户组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chown</span> -R 10001:65535 /verdaccio</span><br></pre></td></tr></table></figure>
+
+<p>运行docker-compose：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.9&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">verdaccio:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">verdaccio/verdaccio</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">verdaccio</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;4873:4873&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/verdaccio/conf:/verdaccio/conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/verdaccio/storage:/verdaccio/storage</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/verdaccio/plugins:/verdaccio/plugins</span></span><br></pre></td></tr></table></figure>
+
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、缓存npm包"><a href="#4、缓存npm包" class="headerlink" title="4、缓存npm包"></a>4、缓存npm包</h2><p>仓库地址为：<code>http://ip+端口</code></p>
+<p>当从仓库下载时，先搜寻上传的包有没有需要的npm包，再搜寻<code>storage</code>里有没有缓存到包，没有的话才从<code>uplinks</code>里的外部仓库下载，缓存到<code>storage</code>里。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Verdaccio占用非常小，只有100-200m的内存占用。相较于Nexus来说，说非常简单的存储仓库，比较适合个人使用。</p>
+
+        
+      </div>
+
+         
     </div>
     
-    
-      
-      
-        
-        <div class="year-line">
-            <div class="year-num">2023</div>
-            <div class="dot-wrapper">
-                <div class="dot"></div>
-            </div>
-            <div class="article-count">3 篇文章</div>
-        </div>
-      
-      <a class="archive-article-link" href="/2023/12/14/shi-yong-gitea-actions-zhi-xing-zi-dong-hua-ren-wu/" title="使用Gitea Actions执行自动化任务">
-        <div class="date">12-14 21:14:58</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    使用Gitea Actions执行自动化任务
-                
-            </div>
-        </div>
-        <div class="tags">
-            #docker #hexo #Gitea #CI/CD #Gitea Actions #Github Actions #Act Runner
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/12/11/hexo-gitea-drone-zi-dong-bu-shu-bo-ke/" title="Hexo+Gitea+Drone自动部署博客">
-        <div class="date">12-11 16:36:23</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    Hexo+Gitea+Drone自动部署博客
-                
-            </div>
-        </div>
-        <div class="tags">
-            #docker #hexo #Gitea #Drone #CI/CD
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/12/10/hexo-gitea-jenkins-zi-dong-bu-shu-bo-ke/" title="Hexo+Gitea+Jenkins自动部署博客">
-        <div class="date">12-10 18:33:18</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    Hexo+Gitea+Jenkins自动部署博客
-                
-            </div>
-        </div>
-        <div class="tags">
-            #docker #hexo #Gitea #CI/CD #Jenkins
-        </div>
-      </a>
-    
+     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/12/15/bu-shu-nexus-cang-ku-guan-li-ruan-jian-he-npm-cang-ku/"
+      title="部署Nexus仓库管理软件和npm仓库"
+     >
+
+    <p class="title-text">
+      
+        部署Nexus仓库管理软件和npm仓库
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
