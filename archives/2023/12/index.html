@@ -137,10 +137,10 @@
       <h3 class="widget-title">统计信息</h3>
 
       
-        总文章数：<a>20</a> 篇<br>
-        总字数：<a>27119</a> 字<br>
-        最近更新时间：<br><a>2023-12-19 12:07:45</a><br>
-        <a id="lastupdatedate" style="display: none;">1702958865000</a>
+        总文章数：<a>21</a> 篇<br>
+        总字数：<a>28153</a> 字<br>
+        最近更新时间：<br><a>2023-12-20 22:56:56</a><br>
+        <a id="lastupdatedate" style="display: none;">1703084216000</a>
 
         距离上次更新：<br>
         <a>
@@ -198,62 +198,6 @@
 
       setInterval(updateElapsedTime, 1000); // 每秒更新一次时间差
     </script>
-  
-    
-    <div class="widget-wrap">
-        <div class="widget">
-            <h3 class="widget-title">调用API</h3>
-            历史上的今天： <br>
-            <a id="lssdjt"></a>
-            每日一言： <br>
-            <a id="meiriyiyan"></a>
-        </div>
-    </div>
-    
-
-        <script>
-            fetch('https://zj.v.api.aa1.cn/api/bk/?type=json')
-                .then(response => response.json())
-                .then(data => {
-                    var lssdjt = document.getElementById("lssdjt");
-                    data.content.forEach((content, index) => {
-                        var onecontent = document.createElement("onecontent");
-                        onecontent.textContent = (index + 1) + ". " + content + "。";
-                        lssdjt.appendChild(onecontent);
-                        lssdjt.appendChild(document.createElement("br"));
-                    });
-                })
-                .catch(error => {
-                    var lssdjt = document.getElementById("lssdjt");
-                    lssdjt.textContent = "API调用出错！";
-                    lssdjt.appendChild(document.createElement("br"));
-                });
-
-
-
-            //每日一言api
-            function mryyapi() {
-                var mryy = new XMLHttpRequest();
-                // 设置请求方法和URL
-                mryy.open("GET", "https://v.api.aa1.cn/api/yiyan/index.php", true);
-                // 发送请求
-                mryy.send();
-                // 监听请求状态的改变
-                mryy.onreadystatechange = function () {
-                    if (mryy.readyState === 4 && mryy.status === 200) {
-                        var htmlResponse = mryy.responseText;
-                        // 将HTML代码赋值给<a>标签
-                        var link = document.getElementById("meiriyiyan");
-                        link.innerHTML = htmlResponse;
-                    } else {
-                        var link = document.getElementById("meiriyiyan");
-                        link.innerHTML = "API调用出错！";
-                    }
-                };
-            }
-
-            mryyapi();
-        </script>
   
   <div class="sticky">
     
@@ -317,7 +261,7 @@
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">14 </div>
+          <div class="archive-count">15 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
@@ -335,6 +279,12 @@
     <div class="widget">
       <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2023/12/20/shi-yong-drone-gou-jian-jing-xiang/" title="使用Drone构建镜像" >
+            <div class="recent-link-text">
+              使用Drone构建镜像
+            </div>
+          </a>
         
           <a class="recent-link" href="/2023/12/19/chuang-jian-docker-registry-jing-xiang-cang-ku/" title="创建Docker Registry镜像仓库" >
             <div class="recent-link-text">
@@ -357,12 +307,6 @@
           <a class="recent-link" href="/2023/12/15/bu-shu-nexus-cang-ku-guan-li-ruan-jian-he-npm-cang-ku/" title="部署Nexus仓库管理软件和npm仓库" >
             <div class="recent-link-text">
               部署Nexus仓库管理软件和npm仓库
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2023/12/14/shi-yong-gitea-actions-zhi-xing-zi-dong-hua-ren-wu/" title="使用Gitea Actions执行自动化任务" >
-            <div class="recent-link-text">
-              使用Gitea Actions执行自动化任务
             </div>
           </a>
         
@@ -394,8 +338,27 @@
             <div class="dot-wrapper">
                 <div class="dot"></div>
             </div>
-            <div class="article-count">14 篇文章</div>
+            <div class="article-count">15 篇文章</div>
         </div>
+      
+      <a class="archive-article-link" href="/2023/12/20/shi-yong-drone-gou-jian-jing-xiang/" title="使用Drone构建镜像">
+        <div class="date">12-20 22:56:56</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    使用Drone构建镜像
+                
+            </div>
+        </div>
+        <div class="tags">
+            #docker #Drone #CI/CD
+        </div>
+      </a>
+    
+      
       
       <a class="archive-article-link" href="/2023/12/19/chuang-jian-docker-registry-jing-xiang-cang-ku/" title="创建Docker Registry镜像仓库">
         <div class="date">12-19 12:07:45</div>
