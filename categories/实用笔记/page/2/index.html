@@ -14,26 +14,20 @@
   
 
   
-  <title>创建Nexus的Docker镜像仓库 | 随笔小记</title>
+  <title>目录: 实用笔记 | 随笔小记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/LXGWWenKai-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="上次介绍了如何使用Nexus创建npm软件包仓库，这次来介绍如何创建Docker镜像仓库。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="创建Nexus的Docker镜像仓库">
-<meta property="og:url" content="http://rightdoor.github.io/2023/12/19/chuang-jian-nexus-de-docker-jing-xiang-cang-ku/index.html">
+  <meta name="description" content="写下一些有用的笔记。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="随笔小记">
+<meta property="og:url" content="http://rightdoor.github.io/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/page/2/index.html">
 <meta property="og:site_name" content="随笔小记">
-<meta property="og:description" content="上次介绍了如何使用Nexus创建npm软件包仓库，这次来介绍如何创建Docker镜像仓库。">
+<meta property="og:description" content="写下一些有用的笔记。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-19T03:02:35.000Z">
-<meta property="article:modified_time" content="2023-12-19T05:46:00.683Z">
 <meta property="article:author" content="rightdoor">
-<meta property="article:tag" content="docker">
-<meta property="article:tag" content="Nexus">
-<meta property="article:tag" content="仓库管理">
-<meta property="article:tag" content="docker images">
 <meta name="twitter:card" content="summary">
   
   
@@ -327,125 +321,44 @@
     <div id="content-body">
        
 
-
-<article id="post-chuang-jian-nexus-de-docker-jing-xiang-cang-ku" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-    
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 class="p-name article-title" itemprop="headline name">
-        创建Nexus的Docker镜像仓库
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-19T03:02:35.000Z" itemprop="datePublished">2023-12-19 11:02:35</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E5%AE%9E%E7%94%A8%E7%AC%94%E8%AE%B0/">实用笔记</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            930 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nexus/" rel="tag">Nexus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-images/" rel="tag">docker images</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/" rel="tag">仓库管理</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>上次介绍了如何使用Nexus创建npm软件包仓库，这次来介绍如何创建Docker镜像仓库。</p>
-<span id="more"></span>
-
-<h1 id="Docker仓库"><a href="#Docker仓库" class="headerlink" title="Docker仓库"></a>Docker仓库</h1><h2 id="1、端口映射"><a href="#1、端口映射" class="headerlink" title="1、端口映射"></a>1、端口映射</h2><p>使用docker部署时，给Nexus新增两个映射端口，一个指向group仓库，一个指向hosted仓库。</p>
-<h2 id="2、docker-proxy"><a href="#2、docker-proxy" class="headerlink" title="2、docker proxy"></a>2、docker proxy</h2><p>设置好名称，选择后存储地址。</p>
-<p>Remote Storage： 填写镜像加速地址，如果没有使用官方的地址<code>https://index.docker.io</code>。</p>
-<p>Docker Index： 选择<code>Docker Hub</code>。</p>
-<h2 id="3、docker-hosted"><a href="#3、docker-hosted" class="headerlink" title="3、docker hosted"></a>3、docker hosted</h2><p>设置好名称，选择后存储地址。</p>
-<p>勾选http或者https，填写上要使用的端口号。</p>
-<h2 id="4、docker-group"><a href="#4、docker-group" class="headerlink" title="4、docker group"></a>4、docker group</h2><p>跟docker hosted设置相同。</p>
-<p>设置好使用仓库的顺序即可。</p>
-<h2 id="5、修改docker配置文件"><a href="#5、修改docker配置文件" class="headerlink" title="5、修改docker配置文件"></a>5、修改docker配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
-
-<p>添加以下内容，不要添加http或者https：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;insecure-registries&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="string">&quot;nexus地址:group端口&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;nexus地址:hosted端口&quot;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-
-<p>重启即可。</p>
-<h2 id="6、上传镜像"><a href="#6、上传镜像" class="headerlink" title="6、上传镜像"></a>6、上传镜像</h2><p>先登录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker login nexus地址:hosted端口</span><br></pre></td></tr></table></figure>
-
-<p>给镜像标签：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker tag 镜像:版本 仓库地址/镜像名:版本号</span><br></pre></td></tr></table></figure>
-
-<p>上传镜像：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不要上传到仓库组位置，选择私有仓库地址</span></span><br><span class="line">sudo docker push 仓库地址/镜像名:版本号</span><br></pre></td></tr></table></figure>
-
-<h1 id="镜像缓存"><a href="#镜像缓存" class="headerlink" title="镜像缓存"></a>镜像缓存</h1><p>如果是push了group组里没有的镜像，那么就会从设置的Docker Proxy地址下载，拿nginx镜像举例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仓库地址不带http或者https</span></span><br><span class="line">sudo docker pull group组地址/nginx</span><br><span class="line"><span class="comment"># 重命名镜像，不加版本默认为latest</span></span><br><span class="line">sudo docker tag group组地址/nginx nginx</span><br><span class="line"><span class="comment"># 删除旧镜像</span></span><br><span class="line">sudo docker rmi group组地址/nginx</span><br></pre></td></tr></table></figure>
-
-<p>下次重复此操作就不用直接从源地址下载，而是进行仓库检查，从仓库下载到本地，重新改标签即可。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Nexus的功能很多，Docker镜像仓库只是其实中之一。因为Nexus有网页界面，所有与管理镜像来说体验不错，但是清理镜像非常麻烦。</p>
-
-        
-      </div>
-
-         
+<div class="archive-main-card">
+    <div class="archive-top">
+      <div class="main-title-bar">
+        <div class="main-title-dot"></div>
+        <h1 class="article-title">归档</h1>
+      </div>    
     </div>
     
-     
+    
+      
+      
+        
+        <div class="year-line">
+            <div class="year-num">2023</div>
+            <div class="dot-wrapper">
+                <div class="dot"></div>
+            </div>
+            <div class="article-count">1 篇文章</div>
+        </div>
+      
+      <a class="archive-article-link" href="/2023/11/26/shi-yong-cloudflare-shi-xian-nei-wang-chuan-tou/" title="使用cloudflare实现内网穿透">
+        <div class="date">11-26 18:36:29</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    使用cloudflare实现内网穿透
+                
+            </div>
+        </div>
+        <div class="tags">
+            #cloudflare #内网穿透
+        </div>
+      </a>
+    
   </div>
-  
-    
-<nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2023/12/19/chuang-jian-docker-registry-jing-xiang-cang-ku/"
-      title="创建Docker Registry镜像仓库"
-     >
-    <i class="fa-solid fa-angle-left"></i>
-    <p class="title-text">
-      
-        创建Docker Registry镜像仓库
-        
-    </p>
-  </a>
-  <a class="article-nav-btn right "
-    
-      href="/2023/12/16/bu-shu-verdaccio-ruan-jian-bao-cang-ku/"
-      title="部署Verdaccio软件包仓库"
-     >
-
-    <p class="title-text">
-      
-        部署Verdaccio软件包仓库
-        
-    </p>
-    <i class="fa-solid fa-angle-right"></i>
-  </a>
-</nav>
-
-
-  
-</article>
-
-
-
-
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
